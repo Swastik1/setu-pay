@@ -1,11 +1,11 @@
 @import "tailwindcss";
 
 @theme {
-  --color-setu: #009BDF;
+	--color-setu: #009bdf;
 }
 
 @layer base {
-    :root {
-        --color-setu: #009BDF;
-    }
+	:root {
+		--color-setu: #009bdf;
+	}
 }
