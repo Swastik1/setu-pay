@@ -5,15 +5,7 @@ import {
 	CardTitle,
 	Button,
 } from "@setu/components";
-import {
-	QrCode,
-	Copy,
-	Share2,
-	Clock,
-	User,
-	CreditCard,
-	MessageSquare,
-} from "lucide-react";
+import { QrCode, Copy, Share2 } from "lucide-react";
 
 interface Transaction {
 	id: string;
@@ -161,10 +153,10 @@ export function OutputCard({ upiLink, transactions, onBack }: OutputCardProps) {
 					</Button>
 					<Button
 						onClick={shareLink}
-						className="flex-1 bg-green-600 hover:bg-green-700 text-white cursor-pointer"
+						className="flex-1 bg-green-600 hover:bg-green-700 text-white cursor-pointer rounded-md"
 						size="sm"
 					>
-						<Share2 className="h-4 w-4 mr-2" />
+						<Share2 className="h-4 w-4 mr-2 flex items-center justify-center " />
 						Share
 					</Button>
 				</div>
@@ -172,7 +164,7 @@ export function OutputCard({ upiLink, transactions, onBack }: OutputCardProps) {
 				{/* Back Button */}
 				<Button
 					onClick={onBack}
-					className="w-full bg-gray-600 hover:bg-gray-700 text-white"
+					className="w-full bg-gray-600 hover:bg-gray-700 text-white cursor-pointer rounded-md"
 				>
 					Back to Form
 				</Button>

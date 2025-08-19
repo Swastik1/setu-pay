@@ -45,10 +45,10 @@ function App() {
 					{/* Right Panel - Generated Output or Placeholder */}
 					<div className="lg:col-span-1">
 						{!showOutput ? (
-							<div className="rounded-2xl bg-white p-6 shadow border border-gray-200">
+							<div className="rounded-2xl bg-white p-6 shadow border border-gray-200 h-full">
 								<CardHeader>
-									<CardTitle className="flex items-center space-x-2">
-										<QrCode className="h-6 w-6 text-setu" />
+									<CardTitle className="flex items-center space-x-2  font-medium">
+										{/* <QrCode className="h-6 w-6 text-setu" /> */}
 										<span>UPI QR Output</span>
 									</CardTitle>
 									<p className="mt-2 text-sm text-gray-600 space-y-6">
@@ -58,10 +58,10 @@ function App() {
 								<div className="h-24 w-24 mx-auto bg-gray-100 rounded-lg flex items-center justify-center mb-4">
 									<QrCode className="h-32 w-32 mx-auto text-gray-300 bg-white mb-2" />
 								</div>
-								<h3 className="text-lg font-medium text-gray-700 mb-2">
-									Enter Payment Details to Generate UPI Link
+								<h3 className="text-lg font-sm text-gray-700 mb-2">
+									Enter Details to Generate UPI Link
 								</h3>
-								<p className="text-sm text-gray-600">
+								<p className="text-sm text-gray-400">
 									Fill in the payment details and click
 									generate to create your UPI link
 								</p>
