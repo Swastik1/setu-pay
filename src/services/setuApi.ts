@@ -16,14 +16,13 @@ interface AuthTokenResponse {
 	status: number;
 	success: boolean;
 }
-
 interface CreatePaymentLinkRequest {
 	amount: {
 		currencyCode: string;
 		value: number;
 	};
 	amountExactness: string;
-	billerId: string;
+	billerBillID: string;
 	expiryDate: string;
 	name: string;
 	transactionNote?: string;
@@ -38,11 +37,11 @@ interface CreatePaymentLinkRequest {
 				unit: string;
 				value: number;
 			};
-			primaryAccount: {
-				id: string;
-				ifsc: string;
-			};
 		}>;
+		primaryAccount: {
+			id: string;
+			ifsc: string;
+		};
 	};
 }
 
@@ -147,14 +146,7 @@ export async function getAuthToken(
  */
 
 export async function createPaymentLink(
-	data: {
-		vpa: string;
-		amount: number;
-		note: string;
-		billerBillID: string;
-		primaryAccountId: string;
-		primaryAccountIFSC: string;
-	},
+	data: CreatePaymentLinkRequest,
 	accessToken: string,
 	productInstanceId: string
 ): Promise<CreatePaymentLinkResponse> {
@@ -170,30 +162,32 @@ export async function createPaymentLink(
 			body: JSON.stringify({
 				amount: {
 					currencyCode: "INR",
-					value: Math.round(data.amount * 100),
+					value: Math.round(data.amount.value * 100),
 				},
 				amountExactness: "EXACT",
 				billerBillID: data.billerBillID,
 				expiryDate: expiryDate,
-				name: data.note || "Payment",
-				transactionNote: data.note,
+				name: data.transactionNote || "Payment",
+				transactionNote: data.transactionNote,
 				settlement: {
 					parts: [
 						{
 							account: {
-								id: data.primaryAccountId,
-								ifsc: data.primaryAccountIFSC,
+								id: data.settlement.primaryAccount.id,
+								ifsc: data.settlement.primaryAccount.ifsc,
 							},
 							remarks: "Payment settlement",
 							split: {
 								unit: "INR",
-								value: Math.round(data.amount * 100),
+								value: Math.round(
+									data.settlement.parts[0].split.value * 100
+								),
 							},
 						},
 					],
 					primaryAccount: {
-						id: data.primaryAccountId,
-						ifsc: data.primaryAccountIFSC,
+						id: data.settlement.primaryAccount.id,
+						ifsc: data.settlement.primaryAccount.ifsc,
 					},
 				},
 			}),
@@ -226,7 +220,7 @@ export async function getPaymentStatus(
 ): Promise<GetPaymentStatusResponse> {
 	try {
 		const response = await fetch(
-			`${SETU_API_BASE}/payment-links/${platformBillId}`,
+			`${SETU_API_URL}/payment-links/${platformBillId}`,
 			{
 				method: "GET",
 				headers: {
