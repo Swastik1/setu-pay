@@ -8,4 +8,32 @@
 	:root {
 		--color-setu: #009bdf;
 	}
+
+	* {
+		font-family: "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
+			"Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+	}
+
+	body {
+		font-family: "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
+			"Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+		font-size: 14px;
+		line-height: 1.5;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+	}
+
+	input,
+	textarea,
+	select {
+		font-family: inherit;
+		font-size: 14px;
+		line-height: 1.5;
+	}
+
+	input::placeholder,
+	textarea::placeholder {
+		font-size: 14px;
+		opacity: 0.6;
+	}
 }

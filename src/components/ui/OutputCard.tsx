@@ -50,7 +50,7 @@ export function OutputCard({ upiLink, transactions, onBack }: OutputCardProps) {
 	return (
 		<Card className="shadow-md bg-white border-gray-200">
 			<CardHeader>
-				<CardTitle className="flex items-center space-x-2">
+				<CardTitle className="flex items-center space-x-2 font-bold">
 					<QrCode className="h-6 w-6 text-setu" />
 					<span>Generated Output</span>
 				</CardTitle>
@@ -59,22 +59,19 @@ export function OutputCard({ upiLink, transactions, onBack }: OutputCardProps) {
 				</p>
 			</CardHeader>
 
-			<CardContent className="space-y-6">
+			<CardContent>
 				{/* QR Code Section */}
-				<div className="space-y-3">
-					<h3 className="text-sm font-medium text-gray-700">
-						QR Code
-					</h3>
-					<div className="bg-white p-8 rounded-lg border-2 border-gray-200 text-center">
-						<QrCode className="h-32 w-32 mx-auto text-black mb-2" />
-						<p className="text-xs text-gray-500">
+				<div>
+					<div className="bg-white text-center mx-auto">
+						<QrCode className="h-24 w-24 mx-auto text-black mb-4" />
+						<p className="text-xs text-gray-500 mb-2">
 							QR Code generated successfully
 						</p>
 					</div>
 				</div>
 
 				{/* UPI Deep Link Section */}
-				<div className="space-y-3">
+				<div>
 					<h3 className="text-sm font-medium text-gray-700">
 						UPI Deep Link:
 					</h3>
@@ -142,29 +139,33 @@ export function OutputCard({ upiLink, transactions, onBack }: OutputCardProps) {
 				</div> */}
 
 				{/* Action Buttons */}
-				<div className="flex space-x-3">
+				<div className="flex justify-center items-center py-2 mb-1 gap-2">
 					<Button
 						onClick={copyToClipboard}
 						className="flex-1 bg-white border border-gray-300 text-gray-700 hover:bg-gray-50 cursor-pointer"
-						size="sm"
+						size="lg"
 					>
-						<Copy className="h-4 w-4 mr-2" />
-						Copy Link
+						<Copy className="h-2 w-2 mr-2" />
+						<span className="flex items-center justify-center mb-2">
+							Copy Link
+						</span>
 					</Button>
 					<Button
 						onClick={shareLink}
 						className="flex-1 bg-green-600 hover:bg-green-700 text-white cursor-pointer rounded-md"
 						size="sm"
 					>
-						<Share2 className="h-4 w-4 mr-2 flex items-center justify-center " />
-						Share
+						<Share2 className="h-2.5 w-2 mr-2.5" />
+						<span className="flex items-center justify-center mb-2">
+							Share
+						</span>
 					</Button>
 				</div>
 
 				{/* Back Button */}
 				<Button
 					onClick={onBack}
-					className="w-full bg-gray-600 hover:bg-gray-700 text-white cursor-pointer rounded-md"
+					className=" w-full bg-gray-600 hover:bg-gray-700 text-white cursor-pointer rounded-sm"
 				>
 					Back to Form
 				</Button>

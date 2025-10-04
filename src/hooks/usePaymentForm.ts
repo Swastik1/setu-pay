@@ -95,6 +95,9 @@ export function usePaymentForm() {
 
 		setTransactions((prev) => [newTransaction, ...prev]);
 		setShowOutput(true);
+
+		setFormData({ vpa: "", amount: "", note: "" });
+		setErrors({});
 	};
 
 	// Reset form

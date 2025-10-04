@@ -34,13 +34,15 @@ export function PaymentForm({
 	return (
 		<Card className="shadow-md bg-white border-gray-200">
 			<CardHeader>
-				<CardTitle className="flex items-center space-x-2">
+				<CardTitle className="flex items-center space-x-2 font-bold">
 					<QrCode className="h-6 w-6 text-setu" />
 					<span>Payment Details</span>
 				</CardTitle>
-				<p className="mt-2 text-sm text-gray-600">
-					Enter payment information to generate UPI link
-				</p>
+				<div className="flex flex-col ">
+					<p className="mt-2 text-sm text-gray-600">
+						Enter payment information to generate UPI link
+					</p>
+				</div>
 			</CardHeader>
 
 			<CardContent className="space-y-4">

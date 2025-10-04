@@ -48,7 +48,7 @@ export function FormField({
 				type={type}
 				value={value}
 				onChange={(e) => onChange(e.target.value)}
-				className={`bg-gray-50 border-gray-100 ${
+				className={`bg-gray-50 border-gray-100 p-2.5 text-sm ${
 					error ? "border-red-500" : ""
 				}`}
 				required={required}
