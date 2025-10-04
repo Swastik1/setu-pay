@@ -5,23 +5,27 @@ import {
 	CardTitle,
 	Button,
 } from "@setu/components";
-import { QrCode, Copy, Share2 } from "lucide-react";
+import { QrCode, Copy, Share2, Loader2 } from "lucide-react";
 
-interface Transaction {
-	id: string;
-	vpa: string;
-	amount: string;
-	note: string;
-	timestamp: string;
-}
+// interface Transaction {
+// 	id: string;
+// 	vpa: string;
+// 	amount: string;
+// 	note: string;
+// 	timestamp: string;
+// }
 
 interface OutputCardProps {
 	upiLink: string;
-	transactions: Transaction[];
 	onBack: () => void;
+	isGenerating?: boolean;
 }
 
-export function OutputCard({ upiLink, transactions, onBack }: OutputCardProps) {
+export function OutputCard({
+	upiLink,
+	onBack,
+	isGenerating = false,
+}: OutputCardProps) {
 	const copyToClipboard = async () => {
 		try {
 			await navigator.clipboard.writeText(upiLink);
@@ -62,12 +66,23 @@ export function OutputCard({ upiLink, transactions, onBack }: OutputCardProps) {
 			<CardContent>
 				{/* QR Code Section */}
 				<div>
-					<div className="bg-white text-center mx-auto">
-						<QrCode className="h-24 w-24 mx-auto text-black mb-4" />
-						<p className="text-xs text-gray-500 mb-2">
-							QR Code generated successfully
-						</p>
-					</div>
+					{isGenerating ? (
+						<div className="bg-white text-center mx-auto">
+							<div className="h-24 w-24 mx-auto bg-gray-100 rounded-lg flex items-center justify-center mb-4">
+								<Loader2 className="h-12 w-12 text-blue-600 animate-spin" />
+							</div>
+							<p className="text-xs text-gray-500 mb-2">
+								Generating QR Code...
+							</p>
+						</div>
+					) : (
+						<div className="bg-white text-center mx-auto">
+							<QrCode className="h-24 w-24 mx-auto text-black mb-4" />
+							<p className="text-xs text-gray-500 mb-2">
+								QR Code generated successfully
+							</p>
+						</div>
+					)}
 				</div>
 
 				{/* UPI Deep Link Section */}

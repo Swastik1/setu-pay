@@ -13,10 +13,10 @@ function App() {
 		showOutput,
 		upiLink,
 		errors,
-		transactions,
 		updateField,
 		generateUpiLink,
 		goBackToForm,
+		isGenerating,
 	} = usePaymentForm();
 
 	return (
@@ -39,6 +39,7 @@ function App() {
 							}
 							onNoteChange={(value) => updateField("note", value)}
 							onSubmit={generateUpiLink}
+							isGenerating={isGenerating}
 						/>
 					</div>
 
@@ -70,8 +71,8 @@ function App() {
 						) : (
 							<OutputCard
 								upiLink={upiLink}
-								transactions={transactions}
 								onBack={goBackToForm}
+								isGenerating={isGenerating}
 							/>
 						)}
 					</div>

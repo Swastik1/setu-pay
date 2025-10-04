@@ -5,7 +5,7 @@ import {
 	CardTitle,
 	Button,
 } from "@setu/components";
-import { QrCode, User, CreditCard, MessageSquare } from "lucide-react";
+import { QrCode, User, CreditCard, MessageSquare, Loader2 } from "lucide-react";
 import { FormField } from "./FormField";
 
 interface PaymentFormProps {
@@ -18,6 +18,7 @@ interface PaymentFormProps {
 	onAmountChange: (value: string) => void;
 	onNoteChange: (value: string) => void;
 	onSubmit: () => void;
+	isGenerating?: boolean;
 }
 
 export function PaymentForm({
@@ -30,6 +31,7 @@ export function PaymentForm({
 	onAmountChange,
 	onNoteChange,
 	onSubmit,
+	isGenerating = false,
 }: PaymentFormProps) {
 	return (
 		<Card className="shadow-md bg-white border-gray-200">
@@ -84,13 +86,27 @@ export function PaymentForm({
 				/>
 
 				<Button
-					className="w-full bg-setu hover:bg-setu/90 flex items-center justify-center cursor-pointer rounded-md px-4 py-2"
+					className={`w-full flex items-center justify-center cursor-pointer rounded-sm px-4 py-2 ${
+						isGenerating
+							? "bg-gray-400 cursor-not-allowed"
+							: "bg-setu hover:bg-setu/90"
+					}`}
 					onClick={onSubmit}
+					disabled={isGenerating}
 				>
-					<QrCode className="h-4 w-4 mr-2 items-center bg-white" />
-					<span className="text-white">
-						Generate UPI Link & QR Code
-					</span>
+					{isGenerating ? (
+						<>
+							<Loader2 className="h-4 w-4 mr-2 animate-spin" />
+							<span className="text-white">Generating...</span>
+						</>
+					) : (
+						<>
+							<QrCode className="h-4 w-4 mr-2 items-center bg-white" />
+							<span className="text-white">
+								Generate UPI Link & QR Code
+							</span>
+						</>
+					)}
 				</Button>
 			</CardContent>
 		</Card>

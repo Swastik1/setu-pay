@@ -30,7 +30,9 @@ export function usePaymentForm() {
 	const [errors, setErrors] = useState<Partial<PaymentFormData>>({});
 
 	// Transaction history
-	const [transactions, setTransactions] = useState<Transaction[]>([]);
+	// const [transactions, setTransactions] = useState<Transaction[]>([]);
+
+	const [isGenerating, setIsGenerating] = useState(false);
 
 	// Validation function
 	const validateForm = (): boolean => {
@@ -72,6 +74,13 @@ export function usePaymentForm() {
 			return;
 		}
 
+		setIsGenerating(true);
+		setTimeout(() => {
+			setIsGenerating(false);
+			setShowOutput(true);
+			setFormData({ vpa: "", amount: "", note: "" });
+			setErrors({});
+		}, 3500);
 		// Create UPI deep link (basic version - Todo: enhance this with Setu API)
 		const upiParams = new URLSearchParams();
 		upiParams.append("pa", formData.vpa.trim());
@@ -85,19 +94,15 @@ export function usePaymentForm() {
 		setUpiLink(generatedLink);
 
 		// Add to transaction history
-		const newTransaction: Transaction = {
-			id: Date.now().toString(),
-			vpa: formData.vpa.trim(),
-			amount: formData.amount.trim(),
-			note: formData.note.trim() || "No note",
-			timestamp: new Date().toLocaleString(),
-		};
+		// const newTransaction: Transaction = {
+		// 	id: Date.now().toString(),
+		// 	vpa: formData.vpa.trim(),
+		// 	amount: formData.amount.trim(),
+		// 	note: formData.note.trim() || "No note",
+		// 	timestamp: new Date().toLocaleString(),
+		// };
 
-		setTransactions((prev) => [newTransaction, ...prev]);
-		setShowOutput(true);
-
-		setFormData({ vpa: "", amount: "", note: "" });
-		setErrors({});
+		// setTransactions((prev) => [newTransaction, ...prev]);
 	};
 
 	// Reset form
@@ -120,12 +125,13 @@ export function usePaymentForm() {
 		// UI state
 		showOutput,
 		upiLink,
+		isGenerating,
 
 		// Errors
 		errors,
 
 		// Transactions
-		transactions,
+		// transactions,
 
 		// Actions
 		updateField,
