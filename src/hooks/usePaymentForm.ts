@@ -76,11 +76,13 @@ export function usePaymentForm() {
 
 		setIsGenerating(true);
 		setTimeout(() => {
-			setIsGenerating(false);
 			setShowOutput(true);
 			setFormData({ vpa: "", amount: "", note: "" });
 			setErrors({});
-		}, 3500);
+			setTimeout(() => {
+				setIsGenerating(false);
+			}, 500);
+		}, 3000);
 		// Create UPI deep link (basic version - Todo: enhance this with Setu API)
 		const upiParams = new URLSearchParams();
 		upiParams.append("pa", formData.vpa.trim());
