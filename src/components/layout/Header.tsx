@@ -2,13 +2,9 @@ import { Zap } from "lucide-react";
 
 interface HeaderProps {
 	title?: string;
-	subtitle?: string;
 }
 
-export function Header({
-	title = "Setu UPI Explorer",
-	subtitle = "Generate UPI deep links and QR codes with real-time validation. Perfect for payments, requests, and testing UPI integrations.",
-}: HeaderProps) {
+export function Header({ title = "Setu UPI Explorer" }: HeaderProps) {
 	return (
 		<header>
 			<div className="mx-auto max-w-4xl px-4 py-6">
@@ -20,7 +16,9 @@ export function Header({
 						</h1>
 					</div>
 					<p className="text-gray-500 text-base font-normal">
-						{subtitle}
+						Generate UPI deep links and QR codes with real-time
+						validation. Perfect for <br /> payments, requests, and
+						testing UPI integrations.
 					</p>
 				</div>
 			</div>
